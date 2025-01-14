@@ -8,4 +8,5 @@ public class Album
     public int Year { get; set; }
     public string Genre { get; set; }
     public string Description { get; set; }
+    public Stock Stock { get; set; }
 }
