@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using RecordShop.Data;
 using RecordShop.Models;
 using System.Reflection.Metadata.Ecma335;
 
@@ -24,7 +25,7 @@ public class AlbumController(AlbumRepository repo) : ControllerBase
         => Ok(_repository.AddAlbum(album));
 
     [HttpPatch("{id}")]
-    public IActionResult UpdateAlbum(int id, [FromBody] JsonPatchDocument patch)
+    public IActionResult UpdateAlbum(int id, [FromBody] JsonPatchDocument<Album> patch)
         => Ok(_repository.UpdateAlbum(id, patch));
 
     [HttpDelete("{id}")]
