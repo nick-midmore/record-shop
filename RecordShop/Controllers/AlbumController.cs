@@ -12,6 +12,10 @@ public class AlbumController(AlbumRepository repo) : ControllerBase
 {
     private readonly AlbumRepository _repository = repo;
 
+    [HttpGet("health")]
+    public IActionResult HealthCheck()
+        => (_repository.Index() is null) ? NotFound("Controller is not responding") : Ok("Controller health ok");
+
     [HttpGet]
     public IActionResult GetAlbums()
         => Ok(_repository.Index());
