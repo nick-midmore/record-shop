@@ -3,27 +3,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RecordShop.Data;
 using RecordShop.Models;
+using RecordShop.Services.Implementations;
 
 namespace RecordShop.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class AlbumController(AlbumRepository repo) : ControllerBase
+public class AlbumController(AlbumService service) : ControllerBase
 {
-    private readonly AlbumRepository _repository = repo;
+    private readonly AlbumService _service = service;
 
     [HttpGet("health")]
     public IActionResult HealthCheck()
-        => (_repository.Index() is null) ? NotFound("Controller is not responding") : Ok("Controller health ok");
+        => (_service.Index() is null) ? NotFound("Controller is not responding") : Ok("Controller health ok");
 
     [HttpGet]
     public IActionResult GetAlbums()
-        => Ok(_repository.Index());
+        => Ok(_service.Index());
 
     [HttpGet("{id}")]
     public IActionResult GetAlbumById(int id)
     {
-        var album = _repository.IndexById(id);
+        var album = _service.IndexById(id);
         return album is not null ? Ok(album) : NotFound("No album found with given Id");
     }
 
@@ -31,7 +32,7 @@ public class AlbumController(AlbumRepository repo) : ControllerBase
     public IActionResult AddAlbum(Album album)
     {
         if (album == null || !ModelState.IsValid) return BadRequest("Model supplied is invalid/empty");
-        var result = _repository.AddAlbum(album);
+        var result = _service.AddAlbum(album);
         return result is not null ? Ok(result) : BadRequest("Operation could not be completed");
     }
 
@@ -39,14 +40,14 @@ public class AlbumController(AlbumRepository repo) : ControllerBase
     public IActionResult UpdateAlbum(int id, [FromBody] JsonPatchDocument<Album> patch)
     {
         if (patch == null || !ModelState.IsValid) return BadRequest("Model supplied is invalid/empty");
-        var result = _repository.UpdateAlbum(id, patch);
+        var result = _service.UpdateAlbum(id, patch);
         return result is not null ? Ok(result) : BadRequest("Operation could not be completed");
     }
 
     [HttpDelete("{id}")]
     public IActionResult DeleteAlbum(int id)
     {
-        var result = _repository.DeleteAlbum(id);
+        var result = _service.DeleteAlbum(id);
         return result ? Ok(result) : NotFound("No result found with given Id");
     }
 
