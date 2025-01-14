@@ -9,6 +9,9 @@ public class ShopContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        base.OnConfiguring(optionsBuilder);
+        var configBuilder = new ConfigurationBuilder();
+        var config = configBuilder.AddUserSecrets<ShopContext>().Build();
+        string? connection = config.GetSection("SQLSERVER")["connectionString"];
+        optionsBuilder.UseSqlServer(connection);
     }
 }
