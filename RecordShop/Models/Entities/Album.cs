@@ -1,4 +1,6 @@
-﻿namespace RecordShop.Models.Entities;
+﻿using RecordShop.Models.DTOs;
+
+namespace RecordShop.Models.Entities;
 
 public class Album
 {
@@ -9,4 +11,18 @@ public class Album
     public string Genre { get; set; }
     public string Description { get; set; }
     public Stock Stock { get; set; }
+
+    public static AlbumDTO ConvertToDTO(Album a)
+    {
+        var dto = new AlbumDTO() 
+        { 
+            Title = a.Title,
+            Artist = a.Artist, 
+            Year = a.Year.ToString(),
+            Description = a.Description, 
+            Genre = a.Genre, 
+            Stock = a.Stock.Quantity.ToString(),
+        };
+        return dto;
+    }
 }

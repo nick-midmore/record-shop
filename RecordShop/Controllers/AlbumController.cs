@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using RecordShop.Data;
 using RecordShop.Models.Entities;
 using RecordShop.Services.Implementations;
 
@@ -14,18 +12,18 @@ public class AlbumController(AlbumService service) : ControllerBase
     private readonly AlbumService _service = service;
 
     [HttpGet("health")]
-    public IActionResult HealthCheck()
+    public ActionResult<string> HealthCheck()
         => (_service.Index() is null) ? NotFound("Controller is not responding") : Ok("Controller health ok");
 
     [HttpGet]
     public IActionResult GetAlbums()
-        => Ok(_service.Index());
+        => Ok(_service.Index().Select(a => Album.ConvertToDTO(a)));
 
     [HttpGet("{id}")]
     public IActionResult GetAlbumById(int id)
     {
         var album = _service.IndexById(id);
-        return album is not null ? Ok(album) : NotFound("No album found with given Id");
+        return album is not null ? Ok(Album.ConvertToDTO(album)) : NotFound("No album found with given Id");
     }
 
     [HttpPost]
