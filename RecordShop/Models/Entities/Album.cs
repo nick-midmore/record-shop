@@ -1,4 +1,4 @@
-﻿namespace RecordShop.Models;
+﻿namespace RecordShop.Models.Entities;
 
 public class Album
 {

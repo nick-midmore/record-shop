@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using RecordShop.Data;
-using RecordShop.Models;
+using RecordShop.Models.Entities;
 using RecordShop.Services.Interfaces;
 
 namespace RecordShop.Services.Implementations;

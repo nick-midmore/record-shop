@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using RecordShop.Models;
+using RecordShop.Models.Entities;
 
 namespace RecordShop;
 

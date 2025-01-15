@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
-using RecordShop.Models;
+using RecordShop.Models.Entities;
 
 namespace RecordShop.Data;
 

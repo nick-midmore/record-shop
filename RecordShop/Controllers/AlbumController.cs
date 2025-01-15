@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using RecordShop.Data;
-using RecordShop.Models;
+using RecordShop.Models.Entities;
 using RecordShop.Services.Implementations;
 
 namespace RecordShop.Controllers;
