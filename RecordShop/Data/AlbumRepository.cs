@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.EntityFrameworkCore;
+using RecordShop.Models.DTOs;
 using RecordShop.Models.Entities;
 
 namespace RecordShop.Data;
@@ -7,10 +9,12 @@ public class AlbumRepository(ShopContext context)
 {
     private readonly ShopContext _context = context;
     public List<Album>? Index()
-        => _context.Albums.ToList();
+        => _context.Albums
+        .Include(a => a.Stock)
+        .ToList();
 
     public Album? IndexById(int id)
-        => _context.Albums.FirstOrDefault(a => a.Id == id);
+        => _context.Albums.Include(a => a.Stock).FirstOrDefault(a => a.Id == id);
 
     public Album? AddAlbum(Album album)
     {
