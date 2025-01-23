@@ -1,0 +1,22 @@
+﻿@using RecordShopApp.Models
+<div class="card" style="width: 30%;">
+    <div class="card-content">
+        <div class="media">
+            <div class="media-content">
+                <p class="title is-4">@Album.Title</p>
+                <p class="subtitle is-6">@Album.Artist</p>
+            </div>
+        </div>
+
+        <div class="content">
+            @Album.Description
+            <br />
+            Release: @Album.Year
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Album Album { get; set; } = new Album() { Title = "Test", Artist = "Test artist", Description = "Album description placeholder", Genre = "Butt rock", Stock = "37", Year = "1996" };
+}

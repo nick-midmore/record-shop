@@ -1,0 +1,12 @@
+﻿@using RecordShopApp.Models
+<div class="container is-flex is-flex-direction-row is-flex-wrap-wrap">
+    @foreach(var a in Albums)
+    {
+        <AlbumSummary Album="a"/>
+    }
+</div>
+
+@code {
+        [Parameter]
+        public List<Album> Albums { get; set; }
+}

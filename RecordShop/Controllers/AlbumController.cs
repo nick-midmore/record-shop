@@ -26,12 +26,20 @@ public class AlbumController(AlbumService service) : ControllerBase
         return album is not null ? Ok(Album.ConvertToDTO(album)) : NotFound("No album found with given Id");
     }
 
+    [HttpGet("artist/{artist}")]
+    public IActionResult GetAlbumsByArtistId(string artist)
+    {
+        var albums = _service.GetAlbumsByArtistId(artist);
+        if (albums is null) return NotFound();
+        return Ok(albums.Select(a => Album.ConvertToDTO(a)));
+    }
+
     [HttpPost]
     public IActionResult AddAlbum(Album album)
     {
         if (album == null || !ModelState.IsValid) return BadRequest("Model supplied is invalid/empty");
         var result = _service.AddAlbum(album);
-        return result is not null ? Ok(result) : BadRequest("Operation could not be completed");
+        return result is not null ? Ok(Album.ConvertToDTO(result)) : BadRequest("Operation could not be completed");
     }
 
     [HttpPatch("{id}")]
@@ -39,7 +47,7 @@ public class AlbumController(AlbumService service) : ControllerBase
     {
         if (patch == null || !ModelState.IsValid) return BadRequest("Model supplied is invalid/empty");
         var result = _service.UpdateAlbum(id, patch);
-        return result is not null ? Ok(result) : BadRequest("Operation could not be completed");
+        return result is not null ? Ok(Album.ConvertToDTO(result)) : BadRequest("Operation could not be completed");
     }
 
     [HttpDelete("{id}")]

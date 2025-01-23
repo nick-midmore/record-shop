@@ -23,4 +23,7 @@ public class AlbumService(AlbumRepository repo) : IAlbumService
 
     public bool DeleteAlbum(int id)
         => _repo.DeleteAlbum(id);
+
+    public IEnumerable<Album>? GetAlbumsByArtistId(string artist)
+        => _repo.GetAlbumsByArtistId(artist);
 }
