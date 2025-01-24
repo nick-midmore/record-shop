@@ -1,0 +1,54 @@
+﻿@using RecordShopApp.Models
+@rendermode InteractiveAuto
+
+<div class="field">
+    <label class="label">Title</label>
+    <div class="control">
+        <input class="input" type="text" placeholder="e.g Revolver" @bind-value="Album.Title">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Artist</label>
+    <div class="control">
+        <input class="input" type="text" placeholder="e.g. The Beatles" @bind-value="Album.Artist">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Year</label>
+    <div class="control">
+        <input class="input" type="text" placeholder="e.g. 1973" @bind-value="Album.Year">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Genre</label>
+    <div class="control">
+        <input class="input" type="text" placeholder="e.g. Hippie Rock" @bind-value="Album.Genre">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Description</label>
+    <div class="control">
+        <input class="input" type="text" placeholder="e.g. Pretty cool album" @bind-value="Album.Description">
+    </div>
+</div>
+
+<div class="field">
+    <label class="label">Stock</label>
+    <div class="control">
+        <input class="input" type="text" placeholder="e.g. 99" @bind-value="Album.Stock">
+    </div>
+</div>
+
+<button class="button is-ghost">Save</button>
+
+<AlbumSummary Album="Album"/>
+
+@code {
+    [Parameter]
+    public Album Album { get; set; } = new Album() { Title = "Test" };
+
+}

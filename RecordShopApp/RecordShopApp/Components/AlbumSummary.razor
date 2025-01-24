@@ -1,5 +1,6 @@
 ﻿@using RecordShopApp.Models
-<div class="card" style="width: 30%;">
+
+<div class="card is-flex-direction-column mx-3" style="width: 30%;">
     <div class="card-content">
         <div class="media">
             <div class="media-content">
@@ -8,15 +9,15 @@
             </div>
         </div>
 
-        <div class="content">
-            @Album.Description
+        <div>
             <br />
-            Release: @Album.Year
+            Released: @Album.Year
         </div>
     </div>
 </div>
 
+
 @code {
     [Parameter]
-    public Album Album { get; set; } = new Album() { Title = "Test", Artist = "Test artist", Description = "Album description placeholder", Genre = "Butt rock", Stock = "37", Year = "1996" };
+    public Album Album { get; set; }
 }

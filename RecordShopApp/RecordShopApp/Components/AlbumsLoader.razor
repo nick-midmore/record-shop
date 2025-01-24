@@ -16,7 +16,10 @@
         using (var http = new HttpClient())
         {
             try{
-                Albums = await http.GetFromJsonAsync<List<Album>>("https://localhost:7280/api/album");
+                var response = await http.GetFromJsonAsync<List<Album>>("https://localhost:7280/api/album");
+                if(response != null){
+                    Albums = response;
+                }
             }
             catch(Exception e){
                 Console.WriteLine(e.Message);
