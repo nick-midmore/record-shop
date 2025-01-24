@@ -1,0 +1,40 @@
+﻿@using RecordShopApp.Models
+
+<input class="input" type="text" placeholder="Text input" @bind-value="Title"/>
+
+@if(Albums != null && Title == null){
+    <AlbumSummaryList Albums="Albums"/>
+}else if(Title != null){
+    <AlbumSummary Album="GetAlbum(Title)"/>
+}else{
+    <section class="section is-medium">
+        <h1 class="title">Loading...</h1>
+    </section>
+}
+
+
+@code {
+    public List<Album> Albums { get; set; }
+
+    [Parameter]
+    public string? Title { get; set; }
+
+    public Album? GetAlbum(string title)
+    {
+        return Albums.FirstOrDefault(a => a.Title == title);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var http = new HttpClient();
+        try{
+            var response = await http.GetFromJsonAsync<List<Album>>("https://localhost:7280/api/album");
+            if(response != null){
+                Albums = response;
+            }
+        }
+        catch(Exception e){
+            Console.WriteLine(e.Message);
+        }
+    }
+}

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using RecordShop.Models.DTOs;
 using RecordShop.Models.Entities;
 using RecordShop.Services.Implementations;
 

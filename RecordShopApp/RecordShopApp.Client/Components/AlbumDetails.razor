@@ -1,5 +1,5 @@
 ﻿@using RecordShopApp.Models
-@rendermode InteractiveAuto
+@using System.Text.Json.Serialization
 
 <div class="field">
     <label class="label">Title</label>
@@ -42,13 +42,32 @@
         <input class="input" type="text" placeholder="e.g. 99" @bind-value="Album.Stock">
     </div>
 </div>
-
-<button class="button is-ghost">Save</button>
+<button class="button is-ghost" @onclick="GetAlbum">Get Album</button>
+<button class="button is-ghost" @onclick="SaveChanges">Save</button>
 
 <AlbumSummary Album="Album"/>
 
 @code {
+
     [Parameter]
     public Album Album { get; set; } = new Album() { Title = "Test" };
 
+    public HttpClient http = new HttpClient();
+    public async Task GetAlbum()
+    {
+        var album = await http.GetFromJsonAsync<Album>("https://localhost:7280/api/album/3");
+        if (album != null) Album = album;
+    }
+
+    public async Task SaveChanges()
+    {
+        try
+        {
+            await http.PostAsJsonAsync<Album>("https://localhost:7280/api/album", Album);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+    }
 }
