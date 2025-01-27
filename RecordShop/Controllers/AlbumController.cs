@@ -36,10 +36,10 @@ public class AlbumController(AlbumService service) : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult AddAlbum(Album album)
+    public IActionResult AddAlbum(AlbumDTO albumDto)
     {
-        if (album == null || !ModelState.IsValid) return BadRequest("Model supplied is invalid/empty");
-        var result = _service.AddAlbum(album);
+        if (albumDto == null || !ModelState.IsValid) return BadRequest("Model supplied is invalid/empty");
+        var result = _service.AddAlbum(AlbumDTO.ConvertToAlbum(albumDto));
         return result is not null ? Ok(Album.ConvertToDTO(result)) : BadRequest("Operation could not be completed");
     }
 
@@ -55,7 +55,6 @@ public class AlbumController(AlbumService service) : ControllerBase
     public IActionResult DeleteAlbum(int id)
     {
         var result = _service.DeleteAlbum(id);
-        return result ? Ok(result) : NotFound("No result found with given Id");
+        return result ? Ok($"Successfully delete Albumm with id: {id}") : NotFound($"No result found with id: {id}");
     }
-
 }

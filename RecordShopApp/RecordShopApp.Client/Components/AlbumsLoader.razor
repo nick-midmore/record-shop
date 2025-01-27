@@ -19,22 +19,29 @@
     [Parameter]
     public string? Title { get; set; }
 
-    public Album? GetAlbum(string title)
-    {
-        return Albums.FirstOrDefault(a => a.Title == title);
-    }
+    public HttpClient http = new HttpClient();
 
     protected override async Task OnInitializedAsync()
     {
-        var http = new HttpClient();
-        try{
-            var response = await http.GetFromJsonAsync<List<Album>>("https://localhost:7280/api/album");
-            if(response != null){
+        GetAlbumsAsync();
+    }
+
+    public async Task<List<Album>> GetAlbumsAsync()
+    {
+        var response = new List<Album>();
+        try
+        {
+            response = await http.GetFromJsonAsync<List<Album>>("https://localhost:7280/api/album");
+            if (response != null)
+            {
                 Albums = response;
             }
         }
-        catch(Exception e){
+        catch (Exception e)
+        {
             Console.WriteLine(e.Message);
         }
+        return response;
     }
+
 }

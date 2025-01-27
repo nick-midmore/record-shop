@@ -1,4 +1,5 @@
 ﻿using RecordShop.Models.DTOs;
+using System.Text.Json.Serialization;
 
 namespace RecordShop.Models.Entities;
 

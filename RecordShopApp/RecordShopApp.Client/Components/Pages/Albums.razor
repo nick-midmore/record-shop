@@ -1,7 +1,14 @@
 ﻿@page "/albums"
+@page "/albums/{Id:int?}"
 
-<AlbumsLoader/>
+@if(Id == null){
+    <AlbumsLoader/>
+} else {
+    <AlbumDetails Id="@Id"/>
+}
+
 
 @code {
-
+    [Parameter]
+    public int? Id { get; set; }
 }

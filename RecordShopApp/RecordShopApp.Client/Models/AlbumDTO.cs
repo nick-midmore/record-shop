@@ -1,6 +1,6 @@
-﻿using RecordShop.Models.Entities;
+﻿using RecordShopApp.Models;
 
-namespace RecordShop.Models.DTOs;
+namespace RecordShopApp.Client.Models;
 
 public class AlbumDTO
 {
@@ -17,10 +17,10 @@ public class AlbumDTO
         {
             Title = dto.Title,
             Artist = dto.Artist,
-            Year = int.Parse(dto.Year),
+            Year = dto.Year,
             Genre = dto.Genre,
             Description = dto.Description,
-            Stock = new Stock() { Quantity = int.Parse(dto.Stock) }
+            Stock = dto.Stock
         };
     }
 }
