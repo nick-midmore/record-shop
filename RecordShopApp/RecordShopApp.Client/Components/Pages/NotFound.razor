@@ -1,0 +1,12 @@
+﻿@page "/error/{Status:int}"
+
+@if(Status == 404){
+    <_404/>
+}
+
+@code {
+    [Parameter]
+    public int Status { get; set; }
+
+
+}

@@ -43,6 +43,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.UseStatusCodePagesWithRedirects("/error/{0}");
+
 app.UseCors("AllowAllOrigins");
 
 app.UseHttpsRedirection();

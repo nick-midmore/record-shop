@@ -5,6 +5,8 @@ namespace RecordShopApp.Models;
 
 public class Album
 {
+    [JsonPropertyName("id")]
+    public int Id { get; set; }
     [JsonPropertyName("title")]
     public string Title { get; set; }
     [JsonPropertyName("artist")]

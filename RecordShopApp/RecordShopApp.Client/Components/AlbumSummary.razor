@@ -4,7 +4,7 @@
     <div class="card-content">
         <div class="media">
             <div class="media-content">
-                <p class="title is-4">@Album.Title</p>
+                <a class="title is-4" href="/albums/@Album.Id">@Album.Title</a>
                 <p class="subtitle is-6">@Album.Artist</p>
             </div>
         </div>
@@ -16,6 +16,10 @@
             <p class="subtitle is-7">Released: @Album.Year</p>
         </div>
     </div>
+    <footer class="card-footer">
+        <a href="/albums/update/@Album.Id" class="card-footer-item">Edit</a>
+        <a href="/albums/delete/@Album.Id" class="card-footer-item">Delete</a>
+    </footer>
 </div>
 
 @code {

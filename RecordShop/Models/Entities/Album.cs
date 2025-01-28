@@ -17,6 +17,7 @@ public class Album
     {
         var dto = new AlbumDTO() 
         { 
+            Id = a.Id,
             Title = a.Title,
             Artist = a.Artist, 
             Year = a.Year.ToString(),

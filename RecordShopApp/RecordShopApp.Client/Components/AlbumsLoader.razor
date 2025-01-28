@@ -1,12 +1,8 @@
 ﻿@using RecordShopApp.Models
 
-<input class="input" type="text" placeholder="Text input" @bind-value="Title"/>
-
-@if(Albums != null && Title == null){
+@if(Albums != null){
     <AlbumSummaryList Albums="Albums"/>
-}else if(Title != null){
-    <AlbumSummary Album="GetAlbum(Title)"/>
-}else{
+} else{
     <section class="section is-medium">
         <h1 class="title">Loading...</h1>
     </section>
@@ -16,14 +12,11 @@
 @code {
     public List<Album> Albums { get; set; }
 
-    [Parameter]
-    public string? Title { get; set; }
-
     public HttpClient http = new HttpClient();
 
     protected override async Task OnInitializedAsync()
     {
-        GetAlbumsAsync();
+        Albums = await GetAlbumsAsync();
     }
 
     public async Task<List<Album>> GetAlbumsAsync()
@@ -43,5 +36,4 @@
         }
         return response;
     }
-
 }
